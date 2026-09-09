@@ -1,5 +1,5 @@
 import React from 'react'
-import Firework from './Firework.js'
+import Firework from './Firework.jsx'
 import "../styles/ResultModal.css"
 const ResultModal = (props) => {
     

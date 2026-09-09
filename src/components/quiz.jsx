@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import Ques from './ques'
+import Ques from './ques.jsx'
 import "../styles/quiz.css"
-import ResultModal from './ResultModal'
-import Loading from './Loading.js'
+import ResultModal from './ResultModal.jsx'
+import Loading from './Loading.jsx'
 import decodeUriComponent from 'decode-uri-component';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 
@@ -23,6 +23,7 @@ function Quiz() {
     const navigation = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const { category } = useParams();
+    
     if(lookCatNo(category) === -1)
     {
         navigation("/404")
@@ -55,10 +56,11 @@ function Quiz() {
 
 
     //Fetch Token
-    useEffect(() => {
+    function resetToken()
+    {
         fetch(urlToken).then(res => res.json())
             .then(data => setToken(data["token"]))
-    }, [currIndex])
+    }
 
 
     //API request to fetch Questions
@@ -78,11 +80,9 @@ function Quiz() {
         fetch(urlQuestion)
             .then(res => res.json())
             .then(res => {
-                if (res["response_code"] !== 0) {
-                    console.log("respopne != 0");
-                    setCurrIndex(ele => {
-                        return ele + 10;
-                    })
+                if (res["response_code"] == 4) {
+                    console.log("Token Empty - resetting token");
+                    resetToken();
                 }
                 return res;
             })
@@ -123,7 +123,7 @@ function lookCatNo(category) {
   }
 
 function siteForward() {
-    navigation("/quiz/mathematics");
+    navigation("/mathematics");
 }
 if (allQtn !== undefined) {
 
@@ -184,11 +184,11 @@ if (allQtn !== undefined) {
         <section className="quizPage" id="quizPage" >
             <div className="header">Quizton</div>
             <div className="quizcat">
-                <Link to="/quiz/computer-science" className="catElement">Computer</Link>
-                <Link to="/quiz/mathematics" className="catElement">Maths</Link>
-                <Link to="/quiz/sports" className="catElement">Sports</Link>
-                <Link to="/quiz/history" className="catElement">History</Link>
-                <Link to="/quiz/animals" className="catElement">Animals</Link>
+                <Link to="/computer-science" className = {category == "computer-science" ? "select-catElement" : "catElement"}>Computer</Link>
+                <Link to="/mathematics" className = {category == "mathematics" ? "select-catElement" : "catElement"}>Maths</Link>
+                <Link to="/sports" className = {category == "sports" ? "select-catElement" : "catElement"}>Sports</Link>
+                <Link to="/history" className = {category == "history" ? "select-catElement" : "catElement"}>History</Link>
+                <Link to="/animals" className = {category == "animals" ? "select-catElement" : "catElement"}>Animals</Link>
             </div>
             <div className="quiz-p1" id="quiz-sheet">
                 {quest}
@@ -203,7 +203,7 @@ if (allQtn !== undefined) {
                 onClose={closeModal} />
             {/* <button className="check-answer" onClick={showPopup}>Show Score</button> */}
             <button className="check-answer" onClick={openModal}>Show Score</button>
-            <div className="rights">Made By <a href="https://mdshabbirjamal.one" style={{ color: " #f9dd94" }}>Md Shabbir Jamal</a> &copy; {currentYear} All Rights Reserved</div>
+            <div className="rights">Made By <a href="https://mdshabbirjamal.one">Md Shabbir Jamal</a> &copy; {currentYear} All Rights Reserved</div>
         </section>
     )
 }

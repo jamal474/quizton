@@ -41,7 +41,7 @@
   }
   
   .op0:hover,.op1:hover,.op2:hover,.op3:hover {
-    background: linear-gradient(45deg , orange,   #0F172A);
+    border : 2px solid red;
   }
   
   .selected-option {
