@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import Ques from './ques'
+import Ques from './ques.jsx'
 import "../styles/quiz.css"
-import ResultModal from './ResultModal'
-import Loading from './Loading.js'
+import ResultModal from './ResultModal.jsx'
+import Loading from './Loading.jsx'
 import decodeUriComponent from 'decode-uri-component';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 
@@ -123,7 +123,7 @@ function lookCatNo(category) {
   }
 
 function siteForward() {
-    navigation("/quiz/mathematics");
+    navigation("/mathematics");
 }
 if (allQtn !== undefined) {
 
@@ -184,11 +184,11 @@ if (allQtn !== undefined) {
         <section className="quizPage" id="quizPage" >
             <div className="header">Quizton</div>
             <div className="quizcat">
-                <Link to="/quiz/computer-science" className = {category == "computer-science" ? "select-catElement" : "catElement"}>Computer</Link>
-                <Link to="/quiz/mathematics" className = {category == "mathematics" ? "select-catElement" : "catElement"}>Maths</Link>
-                <Link to="/quiz/sports" className = {category == "sports" ? "select-catElement" : "catElement"}>Sports</Link>
-                <Link to="/quiz/history" className = {category == "history" ? "select-catElement" : "catElement"}>History</Link>
-                <Link to="/quiz/animals" className = {category == "animal" ? "select-catElement" : "catElement"}>Animals</Link>
+                <Link to="/computer-science" className = {category == "computer-science" ? "select-catElement" : "catElement"}>Computer</Link>
+                <Link to="/mathematics" className = {category == "mathematics" ? "select-catElement" : "catElement"}>Maths</Link>
+                <Link to="/sports" className = {category == "sports" ? "select-catElement" : "catElement"}>Sports</Link>
+                <Link to="/history" className = {category == "history" ? "select-catElement" : "catElement"}>History</Link>
+                <Link to="/animals" className = {category == "animals" ? "select-catElement" : "catElement"}>Animals</Link>
             </div>
             <div className="quiz-p1" id="quiz-sheet">
                 {quest}
